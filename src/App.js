@@ -1,24 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import JobWizard from "./pages/JobWizard";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { themeStyles } from "./theme";
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import Datatable from "./pages/Datatable";
+import { Route, Routes } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
+import Home from "./pages/Home";
+import Users from "./pages/Users";
 
 function App() {
+  const theme = createTheme(themeStyles);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <LocalizationProvider dateAdapter={AdapterDayjs}>
+      <ThemeProvider theme={theme}>
+        <BrowserRouter>
+          <Routes>
+            <Route exact path="/" element={<Home />} />
+            <Route path="/wizard" element={<JobWizard />} />
+            <Route path="/data-table" element={<Datatable />} />
+            <Route path="/users" element={<Users />} />
+          </Routes>
+        </BrowserRouter>
+      </ThemeProvider>
+    </LocalizationProvider>
   );
 }
 
