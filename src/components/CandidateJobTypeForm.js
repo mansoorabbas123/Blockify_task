@@ -92,8 +92,8 @@ const CandidateJobTypeForm = ({
         <Grid item sm={6}>
           <TextField
             // error
-            id="Career level*"
-            label="Career level*"
+            id="Gender*"
+            label="Gender*"
             name="gender"
             InputLabelProps={{ shrink: true }}
             placeholder="enter value..."

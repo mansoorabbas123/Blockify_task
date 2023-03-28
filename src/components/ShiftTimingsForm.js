@@ -13,8 +13,6 @@ const ShiftTimingsForm = ({
   setShedule,
   error,
 }) => {
-  const shouldDisableTime = (value, view) =>
-    view === "hours" && value.hour() > 9;
   if (error.shift_timing_error.isError) {
     alert(error.shift_timing_error.message);
   }
@@ -31,6 +29,7 @@ const ShiftTimingsForm = ({
       <Box
         sx={{
           display: "flex",
+          flexWrap: "wrap",
           justifyContent: "space-between",
           curser: "pointer",
           my: 4,
@@ -78,12 +77,7 @@ const ShiftTimingsForm = ({
               value={shedule[0].time_range}
               InputLabelProps={{ shrink: false }}
               minTime={dayjs().set("hour", 9).startOf("hour")}
-              //   shouldDisableTime={
-              //     dayjs().set("hour", 9).startOf("hour").hour() > 9 ? true : false
-              //   }
-              //   maxTime={dayjs().set("hour", 14)}
               disabled={!shedule[0].active}
-              //   onError={(newError) => setError(newError)}
               sx={{
                 "& .MuiInputBase-input": {
                   width: "100%",
@@ -98,9 +92,6 @@ const ShiftTimingsForm = ({
                 },
               }}
               onChange={(newValue) => {
-                console.log("newValue", newValue[0].hour());
-                console.log("newValue", newValue[1].hour());
-                // console.log("newValue", newValue[1].());
                 setShedule(
                   shedule.map((s) => {
                     if (s.day === "sunday") {
@@ -146,7 +137,6 @@ const ShiftTimingsForm = ({
           >
             <SingleInputTimeRangeField
               value={shedule[1].time_range}
-              //   helperText="aklsdjfklj"
               shouldDisableTime={() => true}
               InputLabelProps={{ shrink: false }}
               sx={{
